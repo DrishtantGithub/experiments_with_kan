@@ -1,0 +1,3 @@
+model,params,macs,time_per_forward_s
+cnn_baseline,94986,None,0.012899339199066162
+cnn_kan_head,95196,None,0.01283499002456665

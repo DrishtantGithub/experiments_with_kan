@@ -1,0 +1,9 @@
+Baseline CNN:
+params = 94986
+macs = None
+time_per_forward_s = 0.012899339199066162
+
+CNN + KAN Head:
+params = 95196
+macs = None
+time_per_forward_s = 0.01283499002456665

@@ -1,0 +1,9 @@
+model,params,macs,forward_time_ms,size_kb,notes
+Toy MLP,6401.0,6721.0,0.0436691000383386,28.5400390625,
+Toy KAN (21 knots),9761.0,6401.0,0.2450451416734722,43.4072265625,
+CIFAR CNN (baseline),94986.0,10724618.0,2.328367358313699,380.517578125,
+CIFAR CNN + KAN head,95196.0,10724618.0,5.836462850008199,381.95703125,
+Toy KAN (11 knots),8161.0,6401.0,0.3155687500111526,37.0673828125,ablation
+Toy KAN (41 knots),12961.0,6401.0,0.2801364583016644,56.1923828125,ablation
+Other pipelines (notes),,,,,IMDB sample: 2 rows; tabular_housing: housing_metrics.csv; tabular_energy: energy_metrics.csv
+CIFAR Residual KAN Head,142665.0,29846036.0,4.410826400029085,572.97265625,extension

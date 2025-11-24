@@ -1,0 +1,14 @@
+Task,Model,Metric,Value
+Toy Regression,KAN vs ReLU,Qualitative Fit,See figures
+CIFAR-10,CNN,Accuracy,Baseline obtained (quick mode)
+CIFAR-10,CNN+KAN,Accuracy,KAN head obtained (quick mode)
+UCI Housing,RandomForest,RMSE,0.6629466524142278
+UCI Housing,XGBoost,RMSE,0.6517970022829964
+UCI Housing,MLP_ReLU,RMSE,0.6755815925302764
+UCI Housing,KAN_MLP,RMSE,0.6515446228117976
+Energy,RandomForest,RMSE,0.5551253970746384
+Energy,XGBoost,RMSE,0.3978875080301239
+Energy,MLP_ReLU,RMSE,3.727241184372058
+Energy,KAN_MLP,RMSE,2.6322062471190018
+IMDB Sentiment,MLP,Accuracy,0.675
+IMDB Sentiment,KAN,Accuracy,0.705

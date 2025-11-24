@@ -1,0 +1,16 @@
+torch>=2.0.0
+torchvision
+numpy
+matplotlib
+scikit-learn
+pandas
+tqdm
+pyyaml
+seaborn
+pillow
+torchsummary
+ptflops
+# optional for tabular experiments:
+scikit-optimize
+xgboost
+

@@ -1,0 +1,4 @@
+run,head,val_acc
+baseline,linear,0.328
+kan,kan,0.264
+residual_kan,residual_kan,0.372

@@ -1,0 +1,27 @@
+# Ignore Python venv
+venv/
+.venv/
+env/
+
+# Ignore environment files
+*.env
+
+# Ignore .pth files
+*.pth
+
+# Ignore checkpoints and weight files
+*.pt
+*.pth.tar
+
+# Ignore paper folder
+paper/
+
+# Ignore interpretability activation responses
+results/interpretability/activation_response/
+
+# Ignore other large folders
+__pycache__/
+*.pyc
+
+# macOS junk
+.DS_Store

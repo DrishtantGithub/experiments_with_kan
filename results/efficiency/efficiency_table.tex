@@ -1,0 +1,13 @@
+\begin{tabular}{lrrrrl}
+\toprule
+Model & Params & MACs & Forward (ms) & Size (KB) & Notes \\
+\midrule
+Toy MLP & 6401 & 6.72e+03 & 0.044 & 28.5 &  \\
+Toy KAN (21 knots) & 9761 & 6.40e+03 & 0.245 & 43.4 &  \\
+CIFAR CNN (baseline) & 94986 & 1.07e+07 & 2.328 & 380.5 &  \\
+CIFAR CNN + KAN head & 95196 & 1.07e+07 & 5.836 & 382.0 &  \\
+Toy KAN (11 knots) & 8161 & 6.40e+03 & 0.316 & 37.1 & ablation \\
+Toy KAN (41 knots) & 12961 & 6.40e+03 & 0.280 & 56.2 & ablation \\
+Other pipelines (notes) & -- & -- & -- & -- & IMDB sample: 2 rows; tabular_housing: housing_metrics.csv; tabular_energy: energy_metrics.csv \\
+\bottomrule
+\end{tabular}
