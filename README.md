@@ -1,6 +1,10 @@
 KAN-Enhanced Deep Learning Project
 
-This project implements and evaluates Kolmogorov–Arnold Networks (KANs) across multiple modalities and introduces a novel architecture, the Residual KAN Head. The work includes complete model implementations, training pipelines, interpretability analyses, robustness experiments, efficiency evaluations, and the full LaTeX source of an IEEE-style research paper.
+- Drishtant Jain (24M1085)
+- Ankit Kumar Singh (24M1080)
+- Nitin Tomar (24M1079)
+
+This project implements and evaluates Kolmogorov–Arnold Networks (KANs) across multiple modalities and introduces a novel architecture, the Residual KAN Head. The work includes complete model implementations, training pipelines, interpretability analyses, robustness experiments, efficiency evaluations.
 
 Summary
 
@@ -93,3 +97,4 @@ KAN models demonstrate strong interpretability: smooth derivatives, meaningful s
 KAN-based models exhibit higher resilience to noise and superior generalization in low-data settings.
 
 Efficiency remains close to CNN baselines with small parameter overhead.
+
