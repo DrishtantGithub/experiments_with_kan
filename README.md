@@ -1,198 +1,95 @@
-KAN-Enhanced Deep Learning: Robust, Interpretable, and Efficient Models
+KAN-Enhanced Deep Learning Project
 
-This repository contains the full implementation, experiments, and analysis for our EE782 Advanced ML Final Project, where we build, extend, and analyze Kolmogorov–Arnold Networks (KANs) across multiple domains — vision, NLP, tabular regression, and toy function approximation — and benchmark them against classical architectures (MLP & CNN).
+This project implements and evaluates Kolmogorov–Arnold Networks (KANs) across multiple modalities and introduces a novel architecture, the Residual KAN Head. The work includes complete model implementations, training pipelines, interpretability analyses, robustness experiments, efficiency evaluations, and the full LaTeX source of an IEEE-style research paper.
 
-We further introduce a Residual KAN Head, perform extensive ablation, robustness, interpretability, and efficiency analyses, and provide a clean modular codebase suitable for further research.
+Summary
 
-🚀 Project Highlights
-✔ Unified KAN Benchmarking Across Modalities
+Developed a unified benchmarking framework for evaluating KANs against MLP and CNN baselines on vision (CIFAR-10), NLP (IMDB), tabular regression (Housing & Energy), and toy sinusoidal regression tasks.
 
-Toy Regression (sinusoid)
+Proposed a new Residual KAN Head architecture integrating a linear skip connection with a KAN spline block, improving stability, smoothness, and robustness with minimal parameter overhead.
 
-CIFAR-10 image classification
+Designed extensive experimental pipelines including knot ablations, spline curvature analysis, noise robustness, low-data generalization, and model efficiency comparisons (parameters, MACs, latency, model size).
 
-IMDB sentiment analysis
+Built an interpretability suite for spline visualization, derivative smoothness, knot sensitivity, activation mapping, locality estimation, and support-width analysis.
 
-Housing & Energy tabular regression tasks
+Implemented full reproducible pipelines with modular source code, experiment organization, and structured results storage.
 
-✔ Novel Architecture
+Repository Structure (High-Level)
 
-We introduce a Residual KAN Head for CNNs:
+src/: All source code, including model definitions (MLP, CNN, KAN, Residual KAN Head), training modules, interpretability tools, robustness tests, and utilities.
 
-combines linear skip connections
+results/: Trained models, evaluation metrics, plots, interpretability outputs, and robustness experiment results for all datasets.
 
-stabilizes spline curvature
+paper/: IEEE-format LaTeX source files and project figures.
 
-improves robustness + efficiency
+requirements.txt / environment.yml: Full environment and dependency specification.
 
-✔ Deep Experimental Suite
-
-We perform:
-
-Knot Ablations (1, 3, 5, 7 knots)
-
-Spline Curvature Regularization Ablation
-
-Noise Robustness Experiments
-
-Low-Data Generalization
-
-Efficiency (Params, MACs, Latency, Model Size)
-
-Full Interpretability:
-
-Spline visualization
-
-Derivative smoothness
-
-Knot importance
-
-Activation Patterns
-
-Locality measurements
-
-✔ Reproducible Pipelines
-
-Every experiment is runnable end-to-end using:
-
-python -m src.train....
-python -m src.analysis....
-python -m src.robustness....
-
-📂 Repository Structure
-kan_project/
-│
-├── src/
-│   ├── models/                 # MLP, CNN, KAN, Residual KAN
-│   ├── train/                  # Training scripts for toy, CIFAR, NLP, tabular
-│   ├── analysis/               # Interpretability, spline plots, locality, activations
-│   ├── robustness/             # Noise & low-data robustness experiments
-│   └── utils/                  # Data loaders, metrics, plotting helpers
-│
-├── results/                    # Saved trained models + experiment outputs
-│   ├── toy_kan/
-│   ├── cifar_relu/
-│   ├── cifar_kan/
-│   ├── cifar_residual/
-│   ├── interpretability/
-│   ├── robustness/
-│   ├── tabular_housing/
-│   ├── tabular_energy/
-│   └── nlp_imdb/
-│
-├── paper/                      # LaTeX source for IEEE paper
-│   ├── Images/
-│   └── sections/
-│
-├── requirements.txt
-├── environment.yml
-└── README.md
-
-🧪 How to Run Experiments
-1. Create Environment
-conda create -n kan python=3.10
-pip install -r requirements.txt
-
-🎯 Training Pipelines
-➤ Toy Regression (Sinusoid)
-
-KAN:
-
+Training Pipelines
+Toy Regression (Sinusoid)
 python -m src.train.train_toy --activation kan --save_dir ./results/toy_kan
-
-
-ReLU MLP:
-
 python -m src.train.train_toy --activation relu --save_dir ./results/toy_relu
 
-➤ CIFAR-10 Classification
-Baseline CNN
+CIFAR-10 Classification
 python -m src.train.train_cifar --activation relu --save_dir ./results/cifar_relu
-
-CNN + KAN Head
 python -m src.train.train_cifar --activation kan --save_dir ./results/cifar_kan
+python -m src.train.train_cifar_residual --head residual_kan --save_dir ./results/cifar_residual
 
-CNN + Residual KAN Head
-python -m src.train.train_cifar_residual --head residual_kan --save_dir ./results/cifar_residual/residual_kan
-
-➤ IMDB Sentiment Classification
+IMDB Sentiment Classification
 python -m src.nlp.train_imdb --save_dir ./results/nlp_imdb
 
-➤ Tabular Regression (Housing & Energy)
+Tabular Regression (Housing, Energy)
 python -m src.train.train_tabular --dataset housing
 python -m src.train.train_tabular --dataset energy
 
-📊 Analysis Pipelines
-➤ Spline Visualization
+Interpretability Tools
+Spline Visualization
 python -m src.analysis.plot_splines \
-  --model results/cifar_kan/cifar_model.pth \
-  --model-type cnn \
-  --save-dir results/interpretability/splines
+    --model results/cifar_kan/cifar_model.pth \
+    --model-type cnn \
+    --save-dir results/interpretability/splines
 
-➤ Knot Sensitivity
+Knot Importance
 python -m src.analysis.knot_sensitivity \
-  --model results/toy_kan/toy_model.pth \
-  --dataset toy
+    --model results/toy_kan/toy_model.pth \
+    --dataset toy
 
-➤ Locality and Support Width
+Locality and Support Width
 python -m src.analysis.locality \
-  --model results/cifar_kan/cifar_model.pth \
-  --dataset cifar
+    --model results/cifar_kan/cifar_model.pth \
+    --dataset cifar
 
-➤ Activation Patterns
+Activation Pattern Comparison
 python -m src.analysis.activation_response \
-  --kan-model results/cifar_kan/cifar_model.pth \
-  --baseline-model results/cifar_relu/cifar_model.pth
+    --kan-model results/cifar_kan/cifar_model.pth \
+    --baseline-model results/cifar_relu/cifar_model.pth
 
-🛡 Robustness Experiments
-➤ Noise Robustness
+Robustness Experiments
+Noise Robustness
 python -m src.robustness.noise_robustness \
-  --toy-kan results/toy_kan/toy_model.pth \
-  --cifar-kan results/cifar_kan/cifar_model.pth
+    --toy-kan results/toy_kan/toy_model.pth \
+    --cifar-kan results/cifar_kan/cifar_model.pth
 
-➤ Low Data Robustness
+Low-Data Robustness
 python -m src.robustness.low_data \
-  --cifar-kan results/cifar_kan/cifar_model.pth
+    --cifar-kan results/cifar_kan/cifar_model.pth
 
-⚡ Efficiency Evaluation
-
-Compute:
-
-params
-
-MACs
-
-forward-time latency
-
-model size
-
+Efficiency Evaluation
 python -m src.analysis.compute_efficiency
 python -m src.analysis.add_residual_to_efficiency
 
-📈 Key Findings
-✔ KAN consistently outperforms MLP and CNN on regression
-✔ Residual KAN beats all models on CIFAR-10 (especially noise & low-data)
-✔ Splines are interpretable: smooth derivatives, distinct knot importance
-✔ KAN activations show strong locality → better interpretability
-✔ Efficiency close to CNN despite higher flexibility
-🧩 Interpretability Gallery (Available in /results)
 
-Spline functions
+Outputs include parameter counts, MACs, latency benchmarks, and model size.
 
-Spline derivatives
+Key Findings
 
-Knot gradient importance
+KANs consistently outperform MLPs on all regression benchmarks.
 
-Activation heatmaps
+KAN Head architectures outperform classical CNNs on CIFAR-10.
 
-Locality histograms
+The proposed Residual KAN Head provides the best overall performance across accuracy, stability, and robustness.
 
-Support width histograms
+KAN models demonstrate strong interpretability: smooth derivatives, meaningful spline behaviors, localized activations, and identifiable knot importance patterns.
 
-Noise curves
+KAN-based models exhibit higher resilience to noise and superior generalization in low-data settings.
 
-Low-data curves
-
-Efficiency bar charts
-
-All included inside results/interpretability.
+Efficiency remains close to CNN baselines with small parameter overhead.
